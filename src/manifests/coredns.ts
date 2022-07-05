@@ -1,12 +1,11 @@
 import { ConfigMap, Service, ServiceAccount } from 'kubernetes-models/v1';
 import {
   ClusterRole,
-  ClusterRoleBinding,
-  Subject
+  ClusterRoleBinding
 } from 'kubernetes-models/rbac.authorization.k8s.io/v1';
 import dedent from 'dedent-js';
 import { Deployment } from 'kubernetes-models/apps/v1';
-import { DNS_IP, DOMAIN_NAME } from '../common/index';
+import { DNS_IP, DOMAIN_NAME } from '../common';
 
 const name = 'coredns';
 const namespace = 'kube-system';
@@ -79,6 +78,7 @@ export const generate = () => [
                   rewrite name grafana.coyle.club grafana.monitoring.svc.coyle.club
                   rewrite name docker.coyle.club registry.docker.svc.coyle.club
                   rewrite name relay.coyle.club relay.cloudflare.svc.coyle.club
+                  rewrite name nitter.coyle.club nitter.default.svc.coyle.club
                   kubernetes ${DOMAIN_NAME} in-addr.arpa ip6.arpa {
                       pods insecure
                   }
