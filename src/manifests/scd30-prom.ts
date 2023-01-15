@@ -55,7 +55,10 @@ export const generate = () => [
                   name: 'metrics',
                   containerPort: METRICS_PORT
                 }
-              ]
+              ],
+              securityContext: {
+                privileged: true
+              }
             }
           ],
           volumes: [
