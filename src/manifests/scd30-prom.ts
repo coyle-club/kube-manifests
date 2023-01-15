@@ -44,12 +44,27 @@ export const generate = () => [
                 '--port',
                 String(METRICS_PORT)
               ],
+              volumeMounts: [
+                {
+                  name: 'i2c',
+                  mountPath: '/dev/i2c-1'
+                }
+              ],
               ports: [
                 {
                   name: 'metrics',
                   containerPort: METRICS_PORT
                 }
               ]
+            }
+          ],
+          volumes: [
+            {
+              name: 'i2c',
+              hostPath: {
+                path: '/dev/i2c-1',
+                type: 'CharDevice'
+              }
             }
           ]
         }
